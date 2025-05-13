@@ -19,7 +19,6 @@ public class Veiculo {
         return placa;
     }
 
-
     public String getMarca() {
         return marca;
     }
