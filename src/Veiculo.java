@@ -5,7 +5,7 @@ public class Veiculo {
     private String marca;
     private String modelo;
     private String tipo; // Pode ser "pequeno", "grande" ou "moto"
-    private LocalDateTime horaEntrada; // Hora de entrada no estacionamento
+    private LocalDateTime horaEntrada;
 
     public Veiculo(String placa, String marca, String modelo, String tipo) {
         this.placa = placa;
