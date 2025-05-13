@@ -20,6 +20,7 @@ public class Estacionamento {
             if (vaga.estaLivre()) {
                 vaga.ocuparVaga(veiculo);
                 System.out.println("Veículo estacionado na vaga " + vaga.getNumeroVaga());
+                return;
             }
         }
         System.out.println("Não há vagas disponíveis.");

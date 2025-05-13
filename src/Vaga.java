@@ -35,7 +35,7 @@ public class Vaga {
 
     private double calcularValorAPagar(Veiculo veiculo) {
         Duration duration = Duration.between(veiculo.getHoraEntrada(), LocalDateTime.now());
-        long horas = duration.toHours();
+        long horas = Math.max(1, duration.toHours());
 
         double tarifaPorHora = 0.0;
 
