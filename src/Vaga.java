@@ -1,31 +1,13 @@
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Vaga {
-
     private Veiculo veiculo;
-    private LocalDateTime horarioEntrada;
     private int numeroVaga;
 
     public Vaga(int numeroVaga) {
         this.numeroVaga = numeroVaga;
-        this.veiculo = null;
-        this.horarioEntrada = null;
-    }
-
-    public boolean ocuparVaga(Veiculo veiculo) {
-        if (this.veiculo != null) {
-            return false; // já está ocupada
-        }
-        this.veiculo = veiculo;
-        this.horarioEntrada = LocalDateTime.now();
-        return true;
-    }
-
-    public Veiculo liberarVaga() {
-        Veiculo veiculoRemovido = this.veiculo;
-        this.veiculo = null;
-        this.horarioEntrada = null;
-        return veiculoRemovido;
+        this.veiculo = null; // Inicialmente a vaga está livre
     }
 
     public int getNumeroVaga() {
@@ -36,11 +18,42 @@ public class Vaga {
         return veiculo;
     }
 
-    public LocalDateTime getHorarioEntrada() {
-        return horarioEntrada;
-    }
-
     public boolean estaLivre() {
         return veiculo == null;
+    }
+
+    public void ocuparVaga(Veiculo veiculo) {
+        this.veiculo = veiculo;
+    }
+
+    public void liberarVaga() {
+        Veiculo veiculoRemovido = veiculo;
+        double valorAPagar = calcularValorAPagar(veiculoRemovido);
+        System.out.println("Valor a ser pago pelo veículo " + veiculoRemovido.getPlaca() + ": R$" + valorAPagar);
+        this.veiculo = null;
+    }
+
+    private double calcularValorAPagar(Veiculo veiculo) {
+        Duration duration = Duration.between(veiculo.getHoraEntrada(), LocalDateTime.now());
+        long horas = duration.toHours();
+
+        double tarifaPorHora = 0.0;
+
+        switch (veiculo.getTipo()) {
+            case "pequeno":
+                tarifaPorHora = 16.0; // Carro pequeno
+                break;
+            case "grande":
+                tarifaPorHora = 25.0; // Carro grande
+                break;
+            case "moto":
+                tarifaPorHora = 8.0;  // Moto
+                break;
+            default:
+                System.out.println("Tipo de veículo inválido.");
+                break;
+        }
+
+        return tarifaPorHora * horas;
     }
 }

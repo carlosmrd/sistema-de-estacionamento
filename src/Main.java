@@ -9,6 +9,8 @@ public class Main {
 
         String placa;
 
+        System.out.println("Bem-vindo ao " + estacionamento.getNome());
+
         while (true) {
             System.out.println("\n----- MENU -----");
             System.out.println("1. Estacionar um veículo");
